@@ -1,26 +1,26 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import Home from "./routes/Home.tsx";
-import BatchState from './routes/BatchState';
-import Suspense from './routes/Suspense';
-import SuspenseList from './routes/SuspenseList';
-import StartTransition from './routes/StartTransition';
-import UseDeferredValue from './routes/UseDeferredValue';
-import UseTransition from './routes/UseTransition';
+import NewStartTransition from './new/NewStartTransition.tsx';
+import NewSuspense from "./new/NewSuspense.tsx";
+import OldStartTransition from "./old/OldStartTransition.tsx"
+import OldSuspense from "./old/OldSuspense.tsx";
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/BatchState" element={<BatchState/>}/>
-        <Route path="/Suspense" element={<Suspense/>}/>
-        <Route path="/SuspenseList" element={<SuspenseList/>}/>
-        <Route path="/StartTransition" element={<StartTransition/>}/>
-        <Route path="/UseDeferredValue" element={<UseDeferredValue/>}/>
-        <Route path="/UseTransition" element={<UseTransition/>}/>
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter basename={"/new"}>
+        <Routes>
+          <Route path="/startTransition" element={<NewStartTransition/>}/>
+          <Route path="/suspense" element={<NewSuspense/>}/>
+        </Routes>
+      </BrowserRouter>
+      <BrowserRouter basename={'/old'}>
+        <Routes>
+          <Route path="/startTransition" element={<OldStartTransition/>}/>
+          <Route path="/suspense" element={<OldSuspense/>}/>
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 

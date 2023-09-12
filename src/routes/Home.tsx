@@ -7,7 +7,7 @@ export default function Home(){
         <li><Link to="/BatchState">BatchState</Link></li>
         <li><Link to="/Suspense">Suspense</Link></li>
         <li><Link to="/SuspenseList">SuspenseList</Link></li>
-        <li><Link to="/StartTransition">StartTransition</Link></li>
+        <li><Link to="/NewStartTransition">NewStartTransition</Link></li>
         <li><Link to="/UseDeferredValue">UseDeferredValue</Link></li>
         <li><Link to="/UseTransition">UseTransition</Link></li>
       </ul>
