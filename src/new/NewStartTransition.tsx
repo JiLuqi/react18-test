@@ -1,4 +1,4 @@
-import React, { startTransition, useEffect, useState } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 interface Props {
   keyword: string;
 }
@@ -8,6 +8,7 @@ function getWords(keyword:string){
 }
 function Suggestions(props: Props) {
   const [words, setWords] = useState<Array<string>>([]);
+  const [isPending, startTransition] = useTransition();
   useEffect(()=>{
     getWords(props.keyword).then((words:Array<string>)=>{
       //开启渐变更新 本质就是低优先级的更新
@@ -15,11 +16,16 @@ function Suggestions(props: Props) {
     });
   },[props.keyword]);
   return (
-    <ul>
+    <div>
       {
-        words.map((word: string) => <li key={word}>{word}</li>)
+        isPending? <p>正在渲染</p> :
+          <ul>
+            {
+              words.map((word: string) => <li key={word}>{word}</li>)
+            }
+          </ul>
       }
-    </ul>
+    </div>
   )
 }
 export default function NewStartTransition() {

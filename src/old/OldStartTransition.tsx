@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 interface Props {
   keyword: string;
 }
+
+let timer:any = null;
 function getWords(keyword:string){
   const words = new Array(10000).fill(0).map((_,index:number)=>keyword+index);
   return Promise.resolve(words);
@@ -9,9 +11,12 @@ function getWords(keyword:string){
 function Suggestions(props: Props) {
   const [words, setWords] = useState<Array<string>>([]);
   useEffect(()=>{
-    getWords(props.keyword).then((words:Array<string>)=>{
-      setWords(words)
-    });
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      getWords(props.keyword).then((words:Array<string>)=>{
+        setWords(words)
+      });
+    }, 100);
   },[props.keyword]);
   return (
     <ul>
